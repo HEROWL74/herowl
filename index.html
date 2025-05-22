@@ -3,109 +3,1058 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Who is HEROWL</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>HEROWL - Digital Architect</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* ===== ベーススタイル ===== */
+        :root {
+            --electric-cyan: #00ffff;
+            --neon-pink: #ff006f;
+            --plasma-purple: #8b00ff;
+            --toxic-green: #00ff41;
+            --quantum-orange: #ff4500;
+            --void-black: #000000;
+            --dark-matter: #0a0a0a;
+            --nebula-gray: #1a1a1a;
+            --stellar-white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Space Mono', monospace;
+            background: linear-gradient(135deg, var(--void-black) 0%, var(--dark-matter) 50%, var(--nebula-gray) 100%);
+            color: var(--stellar-white);
+            line-height: 1.6;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* ===== 動的背景 ===== */
+        .matrix-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.1;
+        }
+
+        /* ===== ヘッダー ===== */
+        .cyber-header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1rem 5%;
+            backdrop-filter: blur(20px);
+            background: rgba(0, 0, 0, 0.8);
+            border-bottom: 2px solid var(--electric-cyan);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .cyber-logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            font-weight: 900;
+            background: linear-gradient(45deg, var(--electric-cyan), var(--neon-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 3px;
+            animation: logoGlow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes logoGlow {
+            0% { filter: drop-shadow(0 0 5px var(--electric-cyan)); }
+            100% { filter: drop-shadow(0 0 20px var(--neon-pink)); }
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            color: var(--stellar-white);
+            text-decoration: none;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            position: relative;
+            padding: 0.5rem 1rem;
+            border: 1px solid transparent;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: linear-gradient(90deg, var(--electric-cyan), var(--neon-pink));
+            z-index: -1;
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--void-black);
+            border-color: var(--electric-cyan);
+            box-shadow: 0 0 20px var(--electric-cyan);
+        }
+
+        .nav-link:hover::before {
+            width: 100%;
+        }
+
+        /* ===== ヒーローセクション ===== */
+        .hero-section {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(0, 255, 255, 0.3), transparent 30%),
+                radial-gradient(circle at 80% 80%, rgba(255, 0, 111, 0.3), transparent 30%),
+                radial-gradient(circle at 50% 50%, rgba(139, 0, 255, 0.2), transparent 50%);
+            animation: pulseBackground 4s ease-in-out infinite;
+        }
+
+        @keyframes pulseBackground {
+            0%, 100% { opacity: 0.7; }
+            50% { opacity: 1; }
+        }
+
+        .hero-content {
+            z-index: 2;
+        }
+
+        .glitch-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 5rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            position: relative;
+            color: var(--stellar-white);
+            animation: titleGlitch 3s infinite;
+        }
+
+        .glitch-title::before,
+        .glitch-title::after {
+            content: 'HEROWL';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .glitch-title::before {
+            color: var(--electric-cyan);
+            z-index: -1;
+            animation: glitchBefore 3s infinite linear;
+        }
+
+        .glitch-title::after {
+            color: var(--neon-pink);
+            z-index: -2;
+            animation: glitchAfter 3s infinite linear;
+        }
+
+        @keyframes titleGlitch {
+            0%, 90%, 100% { text-shadow: 0 0 10px var(--electric-cyan); }
+            5% { text-shadow: 2px 0 0 var(--neon-pink), -2px 0 0 var(--electric-cyan); }
+            10% { text-shadow: -2px 0 0 var(--neon-pink), 2px 0 0 var(--electric-cyan); }
+        }
+
+        @keyframes glitchBefore {
+            0%, 100% { transform: translate(0); }
+            10% { transform: translate(-2px, -2px); }
+            20% { transform: translate(2px, -2px); }
+            30% { transform: translate(-2px, 2px); }
+            40% { transform: translate(2px, 2px); }
+        }
+
+        @keyframes glitchAfter {
+            0%, 100% { transform: translate(0); }
+            15% { transform: translate(2px, 2px); }
+            25% { transform: translate(-2px, 2px); }
+            35% { transform: translate(2px, -2px); }
+            45% { transform: translate(-2px, -2px); }
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            color: var(--electric-cyan);
+            font-weight: 400;
+            letter-spacing: 2px;
+            animation: typewriter 2s steps(20) forwards;
+            overflow: hidden;
+            white-space: nowrap;
+            border-right: 2px solid var(--electric-cyan);
+        }
+
+        @keyframes typewriter {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        .data-stream {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: 'Space Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--toxic-green);
+            text-align: center;
+            animation: dataFlow 2s ease-in-out infinite;
+        }
+
+        @keyframes dataFlow {
+            0%, 100% { opacity: 0.5; transform: translateX(-50%) translateY(0); }
+            50% { opacity: 1; transform: translateX(-50%) translateY(-10px); }
+        }
+
+        /* ===== セクション共通スタイル ===== */
+        .cyber-section {
+            padding: 6rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            font-weight: 900;
+            background: linear-gradient(45deg, var(--electric-cyan), var(--neon-pink), var(--plasma-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        .section-divider {
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--electric-cyan), var(--neon-pink));
+            margin: 0 auto;
+            box-shadow: 0 0 10px var(--electric-cyan);
+        }
+
+        /* ===== ABOUTセクション ===== */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hologram-card {
+            background: linear-gradient(135deg, rgba(0, 255, 255, 0.1), rgba(255, 0, 111, 0.1));
+            border: 2px solid var(--electric-cyan);
+            border-radius: 20px;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        .hologram-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(0, 255, 255, 0.1), transparent);
+            animation: hologramScan 3s linear infinite;
+        }
+
+        @keyframes hologramScan {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .profile-image {
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(45deg, var(--electric-cyan), var(--neon-pink));
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: var(--void-black);
+            font-weight: 900;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .profile-image::after {
+            content: 'HEROWL';
+            position: absolute;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .about-text {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: var(--stellar-white);
+        }
+
+        /* ===== SKILLSセクション ===== */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-terminal {
+            background: var(--void-black);
+            border: 2px solid var(--toxic-green);
+            border-radius: 10px;
+            padding: 1.5rem;
+            font-family: 'Space Mono', monospace;
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .skill-terminal:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 30px rgba(0, 255, 65, 0.5);
+        }
+
+        .terminal-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--toxic-green);
+        }
+
+        .terminal-dots {
+            display: flex;
+            gap: 0.3rem;
+            margin-right: 1rem;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .dot.red { background-color: #ff5f56; }
+        .dot.yellow { background-color: #ffbd2e; }
+        .dot.green { background-color: #27ca3f; }
+
+        .skill-name {
+            color: var(--toxic-green);
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        .skill-progress {
+            margin-top: 1rem;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background-color: var(--dark-matter);
+            border-radius: 3px;
+            overflow: hidden;
+            margin-top: 0.5rem;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--toxic-green), var(--electric-cyan));
+            border-radius: 3px;
+            transition: width 2s ease-in-out;
+            box-shadow: 0 0 10px var(--toxic-green);
+        }
+
+        /* ===== WORKSセクション ===== */
+        .works-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: linear-gradient(135deg, var(--void-black), var(--dark-matter));
+            border: 2px solid var(--plasma-purple);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .project-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(139, 0, 255, 0.3);
+        }
+
+        .project-image {
+            height: 200px;
+            background: linear-gradient(45deg, var(--plasma-purple), var(--neon-pink));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: var(--stellar-white);
+            font-weight: 700;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-content {
+            padding: 1.5rem;
+        }
+
+        .project-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--electric-cyan);
+            margin-bottom: 0.5rem;
+        }
+
+        .project-description {
+            color: var(--stellar-white);
+            opacity: 0.8;
+            margin-bottom: 1rem;
+        }
+
+        .project-link {
+            display: inline-block;
+            padding: 0.7rem 1.5rem;
+            background: linear-gradient(45deg, var(--electric-cyan), var(--neon-pink));
+            color: var(--void-black);
+            text-decoration: none;
+            border-radius: 5px;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+        }
+
+        .project-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 255, 255, 0.4);
+        }
+
+        /* ===== フッター ===== */
+        .cyber-footer {
+            background: var(--void-black);
+            border-top: 2px solid var(--electric-cyan);
+            padding: 2rem 5%;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .social-matrix {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .social-link {
+            color: var(--stellar-white);
+            text-decoration: none;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--electric-cyan);
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background-color: var(--electric-cyan);
+            color: var(--void-black);
+            box-shadow: 0 0 15px var(--electric-cyan);
+        }
+
+        /* ===== レスポンシブ ===== */
+        @media (max-width: 768px) {
+            .glitch-title {
+                font-size: 3rem;
+            }
+            
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .nav-menu {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .cyber-header {
+                padding: 1rem 3%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .glitch-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
 </head>
 <body>
-    <div class="neon-container">
-        <header>
-            <div class="logo">HEROWL's PORTFOLIO</div>
+    <canvas class="matrix-bg" id="matrixCanvas"></canvas>
+    
+    <header class="cyber-header">
+        <div class="nav-container">
+            <div class="cyber-logo">HEROWL</div>
             <nav>
-                <ul class="nav-links">
-                    <li><a href="#about" class="neon-link">ABOUT</a></li>
-                    <li><a href="#skills" class="neon-link">SKILLS</a></li>
-                    <li><a href="#works" class="neon-link">WORKS</a></li>
+                <ul class="nav-menu">
+                    <li><a href="#about" class="nav-link">About</a></li>
+                    <li><a href="#skills" class="nav-link">Skills</a></li>
+                    <li><a href="#works" class="nav-link">Works</a></li>
                 </ul>
             </nav>
-        </header>
+        </div>
+    </header>
 
-        <main>
-            <section class="hero">
-                <div class="glitch-wrapper">
-                    <h1 class="hero-title glitch" data-text="HEROWL">HEROWL</h1>
-                </div>
-                <p class="hero-subtitle">高校生プログラマー</p>
-                <div class="scroll-indicator">
-                    <span>SCROLL</span>
-                    <div class="arrow"></div>
-                </div>
-            </section>
-
-            <section id="about" class="section">
-                <h2 class="section-title">ABOUT ME</h2>
-                <div class="about-content">
-                    <div class="about-image"></div>
-                    <div class="about-text">
-                        <p>C++、Unityなどを使って、2Dゲームや3Dゲームを制作をしています。</p>
-                    </div>
-                </div>
-            </section>
-
-            <section id="skills" class="section">
-                <h2 class="section-title">SKILLS</h2>
-                <div class="skills-container">
-                    <div class="skill-card">
-                        <div class="skill-icon"><span>C++</span></div>
-                        <div class="skill-level">
-                            <div class="skill-bar" data-level="90"></div>
-                        </div>
-                    </div>
-                    <div class="skill-card">
-                        <div class="skill-icon"><span>C#</span></div>
-                        <div class="skill-level">
-                            <div class="skill-bar" data-level="85"></div>
-                        </div>
-                    </div>
-                    <div class="skill-card">
-                        <div class="skill-icon"><span>C-Langueage</span></div>
-                        <div class="skill-level">
-                            <div class="skill-bar" data-level="80"></div>
-                        </div>
-                    </div>
-                    <div class="skill-card">
-                        <div class="skill-icon"><span>JavaScript</span></div>
-                        <div class="skill-level">
-                            <div class="skill-bar" data-level="75"></div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section id="works" class="section">
-                <h2 class="section-title">作品たち</h2>
-                <div class="works-grid">
-                    <div class="work-card">
-                        <div class="work-image"></div>
-                        <h3>GinRun</h3>
-                        <p>10秒走をオマージュした最初に作ったゲームです。</p>
-                    </div>
-                    <div class="work-card">
-                        <div class="work-image"></div>
-                        <h3>Season Adventure</h3>
-                        <p>四季を冒険というテーマを基に作ったRPGゲームです！！</p>
-                    </div>
-                    <div class="work-card">
-                        <div class="work-image" style="background-image: url('doublecast-image.png'); background-size: cover; background-position: center;"></div>
-                        <h3>Double Cast</h3>
-                        <p>私を含め、3人で、作り上げた二人一役がテーマのゲームです！！</p>
-                        <a href="https://unityroom.com/games/doublecast" class="work-link" target="_blank">プレイする</a>
-                    </div>
-                </div>
-            </section>
-        </main>
-
-        <footer>
-            <p>&copy; 2025 HEROWL - All Rights Reserved</p>
-            <div class="social-links">
-                <a href="https://www.instagram.com/hero.wl74/?next=%2Fhero.wl74%2F" class="social-icon" target="_blank">Instagram</a>
-                <a href="https://github.com/HEROWL74" class="social-icon" target="_blank">GitHub</a>
+    <main>
+        <section class="hero-section">
+            <div class="hero-content">
+                <h1 class="glitch-title">HEROWL</h1>
+                <p class="hero-subtitle">Digital Code Architect</p>
             </div>
-        </footer>
-    </div>
+            <div class="data-stream">
+                > システム起動中...<br>
+                > データストリーム接続完了<br>
+                > ポートフォリオ展開中...
+            </div>
+        </section>
 
-    <script src="script.js"></script>
+        <section id="about" class="cyber-section">
+            <div class="section-header">
+                <h2 class="section-title">ABOUT_ME.EXE</h2>
+                <div class="section-divider"></div>
+            </div>
+            <div class="about-grid">
+                <div class="hologram-card">
+                    <div class="profile-image"></div>
+                </div>
+                <div class="about-text">
+                    <p>サイバースペースの中を駆け抜ける高校生プログラマー。C++とUnityを武器に、デジタル世界で2D・3Dゲームの創造を行っています。</p>
+                    <p>コードは私の言語、ゲームは私のアート。テクノロジーの限界を超えて、新しいデジタル体験を生み出すことが私のミッションです。</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills" class="cyber-section">
+            <div class="section-header">
+                <h2 class="section-title">TECH_STACK.LOG</h2>
+                <div class="section-divider"></div>
+            </div>
+            <div class="skills-grid">
+                <div class="skill-terminal">
+                    <div class="terminal-header">
+                        <div class="terminal-dots">
+                            <div class="dot red"></div>
+                            <div class="dot yellow"></div>
+                            <div class="dot green"></div>
+                        </div>
+                        <div class="skill-name">C++</div>
+                    </div>
+                    <div class="skill-progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill" data-skill="90"></div>
+                        </div>
+                        <p style="color: var(--toxic-green); margin-top: 0.5rem;">MASTERY_LEVEL: 90%</p>
+                    </div>
+                </div>
+                
+                <div class="skill-terminal">
+                    <div class="terminal-header">
+                        <div class="terminal-dots">
+                            <div class="dot red"></div>
+                            <div class="dot yellow"></div>
+                            <div class="dot green"></div>
+                        </div>
+                        <div class="skill-name">C#</div>
+                    </div>
+                    <div class="skill-progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill" data-skill="85"></div>
+                        </div>
+                        <p style="color: var(--toxic-green); margin-top: 0.5rem;">MASTERY_LEVEL: 85%</p>
+                    </div>
+                </div>
+                
+                <div class="skill-terminal">
+                    <div class="terminal-header">
+                        <div class="terminal-dots">
+                            <div class="dot red"></div>
+                            <div class="dot yellow"></div>
+                            <div class="dot green"></div>
+                        </div>
+                        <div class="skill-name">C</div>
+                    </div>
+                    <div class="skill-progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill" data-skill="80"></div>
+                        </div>
+                        <p style="color: var(--toxic-green); margin-top: 0.5rem;">MASTERY_LEVEL: 80%</p>
+                    </div>
+                </div>
+                
+                <div class="skill-terminal">
+                    <div class="terminal-header">
+                        <div class="terminal-dots">
+                            <div class="dot red"></div>
+                            <div class="dot yellow"></div>
+                            <div class="dot green"></div>
+                        </div>
+                        <div class="skill-name">JavaScript</div>
+                    </div>
+                    <div class="skill-progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill" data-skill="75"></div>
+                        </div>
+                        <p style="color: var(--toxic-green); margin-top: 0.5rem;">MASTERY_LEVEL: 75%</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="works" class="cyber-section">
+            <div class="section-header">
+                <h2 class="section-title">PROJECT_ARCHIVE</h2>
+                <div class="section-divider"></div>
+            </div>
+            <div class="works-grid">
+                <div class="project-card">
+                    <div class="project-image">GinRun</div>
+                    <div class="project-content">
+                        <h3 class="project-title">GinRun</h3>
+                        <p class="project-description">10秒走をオマージュした最初に作ったゲーム。スピードと精密さが要求される初期プロジェクト。</p>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-image">Season Adventure</div>
+                    <div class="project-content">
+                        <h3 class="project-title">Season Adventure</h3>
+                        <p class="project-description">四季を冒険というテーマを基に作ったRPGゲーム。季節の変化とともに進化するゲーム体験。</p>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-image">Double Cast</div>
+                    <div class="project-content">
+                        <h3 class="project-title">Double Cast</h3>
+                        <p class="project-description">3人のチームで作り上げた二人一役がテーマのゲーム。協力とシンクロニシティの究極形。</p>
+                        <a href="https://unityroom.com/games/doublecast" class="project-link" target="_blank">Play Game</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="cyber-footer">
+        <div class="footer-content">
+            <div class="social-matrix">
+                <a href="https://www.instagram.com/hero.wl74/?next=%2Fhero.wl74%2F" class="social-link" target="_blank">Instagram</a>
+                <a href="https://github.com/HEROWL74" class="social-link" target="_blank">GitHub</a>
+            </div>
+            <p>&copy; 2025 HEROWL - Digital Reality Interface</p>
+        </div>
+    </footer>
+
+    <script>
+        // Matrix Background Effect
+        function createMatrixBackground() {
+            const canvas = document.getElementById('matrixCanvas');
+            const ctx = canvas.getContext('2d');
+            
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            
+            const characters = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
+            const fontSize = 14;
+            const columns = canvas.width / fontSize;
+            const drops = [];
+            
+            for (let i = 0; i < columns; i++) {
+                drops[i] = 1;
+            }
+            
+            function drawMatrix() {
+                ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                
+                ctx.fillStyle = '#00ff41';
+                ctx.font = `${fontSize}px monospace`;
+                
+                for (let i = 0; i < drops.length; i++) {
+                    const text = characters[Math.floor(Math.random() * characters.length)];
+                    ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                    
+                    if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                        drops[i] = 0;
+                    }
+                    drops[i]++;
+                }
+            }
+            
+            setInterval(drawMatrix, 35);
+        }
+
+        // スキルバーアニメーション
+        function animateSkillBars() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const progressBar = entry.target;
+                        const skillLevel = progressBar.getAttribute('data-skill');
+                        setTimeout(() => {
+                            progressBar.style.width = skillLevel + '%';
+                        }, 300);
+                        observer.unobserve(progressBar);
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            document.querySelectorAll('.progress-fill').forEach(bar => {
+                bar.style.width = '0%';
+                observer.observe(bar);
+            });
+        }
+
+        // スムーススクロール
+        function initSmoothScroll() {
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const targetId = link.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        }
+
+        // セクション表示アニメーション
+        function initScrollAnimations() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.cyber-section').forEach(section => {
+                section.style.opacity = '0';
+                section.style.transform = 'translateY(30px)';
+                section.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+                observer.observe(section);
+            });
+        }
+
+        // ヘッダースクロール効果
+        function initHeaderScroll() {
+            const header = document.querySelector('.cyber-header');
+            let lastScrollY = window.scrollY;
+
+            window.addEventListener('scroll', () => {
+                const currentScrollY = window.scrollY;
+                
+                if (currentScrollY > 100) {
+                    header.style.background = 'rgba(0, 0, 0, 0.95)';
+                    header.style.borderBottom = '2px solid var(--electric-cyan)';
+                } else {
+                    header.style.background = 'rgba(0, 0, 0, 0.8)';
+                }
+
+                if (currentScrollY > lastScrollY && currentScrollY > 100) {
+                    header.style.transform = 'translateY(-100%)';
+                } else {
+                    header.style.transform = 'translateY(0)';
+                }
+                
+                lastScrollY = currentScrollY;
+            });
+        }
+
+        // パーティクル効果
+        function createParticleEffect() {
+            const particleContainer = document.createElement('div');
+            particleContainer.style.position = 'fixed';
+            particleContainer.style.top = '0';
+            particleContainer.style.left = '0';
+            particleContainer.style.width = '100%';
+            particleContainer.style.height = '100%';
+            particleContainer.style.pointerEvents = 'none';
+            particleContainer.style.zIndex = '1';
+            document.body.appendChild(particleContainer);
+
+            function createParticle() {
+                const particle = document.createElement('div');
+                particle.style.position = 'absolute';
+                particle.style.width = '2px';
+                particle.style.height = '2px';
+                particle.style.background = Math.random() > 0.5 ? 'var(--electric-cyan)' : 'var(--neon-pink)';
+                particle.style.borderRadius = '50%';
+                particle.style.boxShadow = `0 0 10px ${Math.random() > 0.5 ? 'var(--electric-cyan)' : 'var(--neon-pink)'}`;
+                particle.style.left = Math.random() * window.innerWidth + 'px';
+                particle.style.top = window.innerHeight + 'px';
+                particle.style.opacity = '0.7';
+                
+                particleContainer.appendChild(particle);
+
+                const animation = particle.animate([
+                    { 
+                        transform: 'translateY(0) translateX(0)',
+                        opacity: 0.7
+                    },
+                    { 
+                        transform: `translateY(-${window.innerHeight + 100}px) translateX(${(Math.random() - 0.5) * 200}px)`,
+                        opacity: 0
+                    }
+                ], {
+                    duration: Math.random() * 3000 + 2000,
+                    easing: 'linear'
+                });
+
+                animation.onfinish = () => {
+                    particle.remove();
+                };
+            }
+
+            setInterval(createParticle, 300);
+        }
+
+        // グリッチテキスト効果
+        function initGlitchEffect() {
+            const glitchElements = document.querySelectorAll('.glitch-title, .section-title');
+            
+            glitchElements.forEach(element => {
+                element.addEventListener('mouseenter', () => {
+                    element.style.animation = 'titleGlitch 0.3s linear';
+                    setTimeout(() => {
+                        element.style.animation = 'titleGlitch 3s infinite';
+                    }, 300);
+                });
+            });
+        }
+
+        // ホログラム効果
+        function initHologramEffect() {
+            const hologramCards = document.querySelectorAll('.hologram-card');
+            
+            hologramCards.forEach(card => {
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    
+                    const rotateX = (y - centerY) / 10;
+                    const rotateY = (centerX - x) / 10;
+                    
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+                });
+                
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg)';
+                });
+            });
+        }
+
+        // ターミナル入力効果
+        function initTerminalEffect() {
+            const terminals = document.querySelectorAll('.skill-terminal');
+            
+            terminals.forEach(terminal => {
+                terminal.addEventListener('mouseenter', () => {
+                    const cursor = document.createElement('span');
+                    cursor.textContent = '█';
+                    cursor.style.color = 'var(--toxic-green)';
+                    cursor.style.animation = 'blink 1s infinite';
+                    terminal.appendChild(cursor);
+                    
+                    setTimeout(() => {
+                        cursor.remove();
+                    }, 2000);
+                });
+            });
+            
+            // カーソル点滅アニメーション
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes blink {
+                    0%, 50% { opacity: 1; }
+                    51%, 100% { opacity: 0; }
+                }
+            `;
+            document.head.appendChild(style);
+        }
+
+        // プロジェクトカードの3D効果
+        function initProjectCard3D() {
+            const projectCards = document.querySelectorAll('.project-card');
+            
+            projectCards.forEach(card => {
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    
+                    const rotateX = (y - centerY) / 20;
+                    const rotateY = (centerX - x) / 20;
+                    
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+                });
+                
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
+                });
+            });
+        }
+
+        // サウンド効果（視覚的フィードバック）
+        function initInteractiveFeedback() {
+            const interactiveElements = document.querySelectorAll('.nav-link, .project-link, .social-link');
+            
+            interactiveElements.forEach(element => {
+                element.addEventListener('click', () => {
+                    element.style.transform = 'scale(0.95)';
+                    setTimeout(() => {
+                        element.style.transform = 'scale(1)';
+                    }, 100);
+                });
+            });
+        }
+
+        // レスポンシブ調整
+        function handleResize() {
+            const canvas = document.getElementById('matrixCanvas');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        // 初期化
+        document.addEventListener('DOMContentLoaded', () => {
+            createMatrixBackground();
+            animateSkillBars();
+            initSmoothScroll();
+            initScrollAnimations();
+            initHeaderScroll();
+            createParticleEffect();
+            initGlitchEffect();
+            initHologramEffect();
+            initTerminalEffect();
+            initProjectCard3D();
+            initInteractiveFeedback();
+            
+            window.addEventListener('resize', handleResize);
+        });
+
+        // パフォーマンス最適化
+        let ticking = false;
+        function updateAnimations() {
+            // アニメーション更新ロジック
+            if (!ticking) {
+                requestAnimationFrame(() => {
+                    // 必要に応じてアニメーション更新
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        }
+
+        // タッチデバイス対応
+        if ('ontouchstart' in window) {
+            document.body.classList.add('touch-device');
+            
+            const style = document.createElement('style');
+            style.textContent = `
+                .touch-device .project-card:hover,
+                .touch-device .skill-terminal:hover,
+                .touch-device .hologram-card:hover {
+                    transform: none !important;
+                }
+                
+                .touch-device .project-card:active {
+                    transform: scale(0.98) !important;
+                }
+            `;
+            document.head.appendChild(style);
+        }
+    </script>
 </body>
 </html>
